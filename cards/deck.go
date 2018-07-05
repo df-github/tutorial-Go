@@ -14,12 +14,15 @@ func newDeck() deck {
 			cards = append(cards, cardValue + " of " + cardSuite)
 		}
 	}
-
 	return cards
 }
 
-func (instance deck) print()  {
+func (instance deck) print() {
 	for index, card := range instance {
 		fmt.Println(index, card)
 	}
+}
+
+func (instance deck) deal(handSize int) (deck, deck) {
+	return instance[:handSize], instance[handSize:]
 }
