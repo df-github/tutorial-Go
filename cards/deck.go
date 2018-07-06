@@ -30,8 +30,8 @@ func (instance deck) print() {
 	}
 }
 
-func (instance deck) deal(handSize int) (deck, deck) {
-	return instance[:handSize], instance[handSize:]
+func deal(cards deck, handSize int) (deck, deck) {
+	return cards[:handSize], cards[handSize:]
 }
 
 func (instance deck) toString() string {

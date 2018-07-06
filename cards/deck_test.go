@@ -40,3 +40,19 @@ func TestSaveToFileAndNewDeckFromFile(t *testing.T){
 
 	os.Remove(filename)
 }
+
+func TestDeal(t *testing.T) {
+	deck := newDeck()
+
+	handSize := 5
+	handDeck, restDeck := deal(deck, handSize)
+
+	if handSize != len(handDeck) {
+		t.Errorf("Expected of having %v cards, but got %v", handSize, len(handDeck))
+	}
+
+	restCardsSize := len(deck) - handSize
+	if restCardsSize != len(restDeck){
+		t.Errorf("Expected of having rest %v cards, but got %v", restCardsSize, len(restDeck))
+	}
+}
