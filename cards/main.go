@@ -1,21 +1,14 @@
 package main
 
-import "fmt"
-
 func main()  {
+	filename := "my-cards"
+
 	cards := newDeck()
+	cards.saveToFile(filename)
 
-	cards.print()
-
-	fmt.Println("-------------------")
-	dealedCards, restDeck :=cards.deal(5)
-
-	fmt.Println("-##### Dealed Cards #####-")
-	dealedCards.print()
-
-	fmt.Println("-##### Rest Cards #####-")
-	restDeck.print()
-
+	cardsFromFile := newDeckFromFile(filename)
+	cardsFromFile.shuffle()
+	cardsFromFile.print()
 }
 
 

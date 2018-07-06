@@ -1,6 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"io/ioutil"
+	"os"
+	"math/rand"
+	"time"
+)
 
 type deck []string
 
@@ -25,4 +32,32 @@ func (instance deck) print() {
 
 func (instance deck) deal(handSize int) (deck, deck) {
 	return instance[:handSize], instance[handSize:]
+}
+
+func (instance deck) toString() string {
+	return strings.Join([]string(instance), ",")
+}
+
+func (instance deck) saveToFile(filename string) error {
+	return ioutil.WriteFile(filename, []byte(instance.toString()),0666)
+}
+
+func newDeckFromFile(filename string) deck  {
+	bytes, err :=ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
+	}
+
+	return deck(strings.Split(string(bytes), ","))
+}
+
+func (instance deck) shuffle() {
+	source := rand.NewSource(time.Now().UnixNano())
+	rand := rand.New(source)
+
+	for index := range instance {
+		newPosition := rand.Intn(len(instance) - 1)
+		instance[index], instance[newPosition] = instance[newPosition], instance[index]
+	}
 }
