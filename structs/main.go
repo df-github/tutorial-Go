@@ -18,7 +18,7 @@ func (instance person) print() {
 }
 
 func (instance *person) updateName(newFirstName string)  {
-	(*instance).firstName = newFirstName
+	instance.firstName = newFirstName
 }
 
 func main()  {
