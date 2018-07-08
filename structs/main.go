@@ -2,17 +2,23 @@ package main
 
 import "fmt"
 
-// custom type
 type contactInfo struct {
 	email string
 	zipCode int
 }
 
-// embedded custom type
 type person struct {
 	firstName string
 	lastName string
 	contact contactInfo
+}
+
+func (instance person) print() {
+	fmt.Printf("%+v\n", instance)
+}
+
+func (instance *person) updateName(newFirstName string)  {
+	(*instance).firstName = newFirstName
 }
 
 func main()  {
@@ -21,9 +27,10 @@ func main()  {
 		lastName: "Fiedler",
 		contact: contactInfo{
 			email: "derrick.fiedler@test.de",
-			zipCode: 12345,
+			zipCode: 38530,
 		},
 	}
 
-	fmt.Printf("%+v", derrick)
+	derrick.updateName("Claude")
+	derrick.print()
 }
